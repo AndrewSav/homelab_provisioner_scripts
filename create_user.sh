@@ -17,10 +17,18 @@ $KEY
 
 sudo chmod 600 "$HOM/.ssh/authorized_keys"
 sudo chown -R "$USR:$USR" "$HOM"
+
+if [[ $PASS ]]; then
 sudo tee "/etc/sudoers.d/$USR" >/dev/null <<.
 $USR ALL=(ALL) ALL
 .
 
 echo -e "$PASS\n$PASS" | sudo passwd "$USR"
+else
+sudo tee "/etc/sudoers.d/$USR" >/dev/null <<.
+$USR ALL=NOPASSWD: ALL
+.
+
+fi
 
 echo "Created user $NAME"
