@@ -1,6 +1,7 @@
 Param (
     [string]$Username,
     [string]$Name,
+    [string]$Key, # Not used in windows version of the script
     [string]$Password
 )
 
